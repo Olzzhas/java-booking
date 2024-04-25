@@ -1,4 +1,4 @@
-package com.olzzhas.booking.config;
+package com.olzzhas.booking.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

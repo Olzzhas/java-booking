@@ -1,6 +1,6 @@
 package com.olzzhas.booking.config;
 
-import com.olzzhas.booking.user.UserRepository;
+import com.olzzhas.booking.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

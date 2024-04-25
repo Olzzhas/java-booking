@@ -1,9 +1,11 @@
-package com.olzzhas.booking.auth;
+package com.olzzhas.booking.services;
 
-import com.olzzhas.booking.config.JwtService;
+import com.olzzhas.booking.auth.AuthenticationRequest;
+import com.olzzhas.booking.auth.AuthenticationResponse;
+import com.olzzhas.booking.auth.RegisterRequest;
 import com.olzzhas.booking.user.Role;
 import com.olzzhas.booking.user.User;
-import com.olzzhas.booking.user.UserRepository;
+import com.olzzhas.booking.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

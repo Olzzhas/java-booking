@@ -1,5 +1,6 @@
-package com.olzzhas.booking.user;
+package com.olzzhas.booking.repository;
 
+import com.olzzhas.booking.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

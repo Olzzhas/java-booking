@@ -1,5 +1,9 @@
-package com.olzzhas.booking.auth;
+package com.olzzhas.booking.controllers;
 
+import com.olzzhas.booking.auth.AuthenticationRequest;
+import com.olzzhas.booking.auth.AuthenticationResponse;
+import com.olzzhas.booking.auth.RegisterRequest;
+import com.olzzhas.booking.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,5 +30,12 @@ public class AuthenticationController {
             @RequestBody AuthenticationRequest request
     ){
         return ResponseEntity.ok(service.authenticate(request));
+    }
+
+    @RestController
+    @RequestMapping("/api/v1/auth")
+    @RequiredArgsConstructor
+    public static class HotelController {
+
     }
 }

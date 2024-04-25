@@ -1,5 +1,6 @@
-package com.olzzhas.booking.config;
+package com.olzzhas.booking.filters;
 
+import com.olzzhas.booking.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
