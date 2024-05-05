@@ -13,4 +13,7 @@ public class HotelResponse {
 
     private int id;
     private String title;
+    private String description;
+    private int price;
+    private String location;
 }

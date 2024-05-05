@@ -3,8 +3,11 @@ package com.olzzhas.booking.controllers;
 import com.olzzhas.booking.auth.AuthenticationRequest;
 import com.olzzhas.booking.auth.AuthenticationResponse;
 import com.olzzhas.booking.auth.RegisterRequest;
+import com.olzzhas.booking.exception.ApiRequestException;
 import com.olzzhas.booking.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.postgresql.util.PSQLException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +25,8 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ){
-        return ResponseEntity.ok(service.register(request));
+            throw new ApiRequestException("api throws exception while creating a new user");
+//            return ResponseEntity.ok(service.register(request));
     }
 
     @PostMapping("/authenticate")

@@ -17,6 +17,9 @@ public class HotelService {
     public HotelResponse create(HotelRequest request) {
         Hotel hotel = new Hotel();
         hotel.setTitle(request.getTitle());
+        hotel.setDescription(request.getDescription());
+        hotel.setLocation(request.getLocation());
+        hotel.setPrice(request.getPrice());
         repository.save(hotel);
         return HotelResponse.builder().title(request.getTitle()).build();
     }
@@ -42,7 +45,7 @@ public class HotelService {
         Optional<Hotel> optionalHotel = repository.findById(hotelId);
         if (optionalHotel.isPresent()) {
             Hotel hotel = optionalHotel.get();
-            return HotelResponse.builder().title(hotel.getTitle()).build();
+            return HotelResponse.builder().title(hotel.getTitle()).description(hotel.getDescription()).price(hotel.getPrice()).location(hotel.getLocation()).build();
         } else {
             throw new NotFoundException();
         }
