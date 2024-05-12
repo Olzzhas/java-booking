@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  myapp:
+    image: java-booking
+    container_name: java-booking
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/java-booking
+      SPRING_DATASOURCE_USERNAME: olzzhas
+      SPRING_DATASOURCE_PASSWORD: Olzhas040404

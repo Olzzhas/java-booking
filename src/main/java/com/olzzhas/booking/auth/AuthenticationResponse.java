@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 public class AuthenticationResponse {
 
     private String token;
-    private String error;
 
 }
 

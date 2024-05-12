@@ -7,12 +7,10 @@ import com.olzzhas.booking.exception.ApiRequestException;
 import com.olzzhas.booking.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.postgresql.util.PSQLException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -25,10 +23,17 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ){
-            throw new ApiRequestException("api throws exception while creating a new user");
-//            return ResponseEntity.ok(service.register(request));
+        try{
+            return ResponseEntity.ok(service.register(request));
+        } catch (DataAccessException e){
+            if (e.getMessage().contains("users_email_key")){
+                throw new ApiRequestException("This email is already in use");
+            }else{
+                throw e;
+            }
+        }
     }
-
+    
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request

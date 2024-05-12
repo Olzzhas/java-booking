@@ -21,7 +21,7 @@ public class HotelService {
         hotel.setLocation(request.getLocation());
         hotel.setPrice(request.getPrice());
         repository.save(hotel);
-        return HotelResponse.builder().title(request.getTitle()).build();
+        return HotelResponse.builder().title(request.getTitle()).id(hotel.getId()).build();
     }
 
     public void delete(int hotelId) {
