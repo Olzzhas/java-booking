@@ -9,6 +9,8 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/hotel")
 @RequiredArgsConstructor
@@ -24,6 +26,11 @@ public class HotelController {
     @GetMapping("/get/{id}")
     public ResponseEntity<HotelResponse> getHotel(@PathVariable("id") int id) throws NotFoundException {
         return ResponseEntity.ok(service.read(id));
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<List<HotelResponse>> getHotel() throws NotFoundException {
+        return ResponseEntity.ok(service.readAll());
     }
 
     @PutMapping("/update/{id}")

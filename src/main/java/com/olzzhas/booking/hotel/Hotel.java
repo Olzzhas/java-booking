@@ -18,7 +18,11 @@ public class Hotel {
     private Integer id;
     private String title;
     private String description;
+    private int capacity;
     private int price;
     private String location;
     private String image_url;
+    @Embedded
+    private HotelDetails details;
 }
+

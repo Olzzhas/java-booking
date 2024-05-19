@@ -6,9 +6,7 @@ import com.olzzhas.booking.auth.RegisterRequest;
 import com.olzzhas.booking.exception.ApiRequestException;
 import com.olzzhas.booking.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
-import org.postgresql.util.PSQLException;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +31,7 @@ public class AuthenticationController {
             }
         }
     }
-    
+
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
