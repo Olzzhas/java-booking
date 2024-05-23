@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,11 @@ public class HotelReservationController {
     @PostMapping("/create")
     public ResponseEntity<HotelReservation> createHotel(@RequestBody HotelReservation reservation){
         return ResponseEntity.ok(service.createReservation(reservation));
+    }
+
+    @GetMapping("/available/{hotelId}/{dateIn}/{dateOut}")
+    public ResponseEntity<List<LocalDate>> getAllReservations(@PathVariable("hotelId") Integer hotelId, @PathVariable("dateIn") LocalDate dateIn, @PathVariable("dateOut") LocalDate dateOut){
+        return ResponseEntity.ok(service.getAvailableDates(hotelId, dateIn, dateOut));
     }
 
     @GetMapping("/get/{id}")

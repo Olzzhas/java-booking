@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationResponse {
-
+    private Integer id;
     private String token;
     private String email;
     private String firstname;

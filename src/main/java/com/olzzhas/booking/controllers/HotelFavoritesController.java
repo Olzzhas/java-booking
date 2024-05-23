@@ -26,7 +26,7 @@ public class HotelFavoritesController {
         return service.getAllFavoritesByUserId(userId);
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete")
     public void deleteFromFavorites(@RequestParam("userId") Integer userId, @RequestParam("hotelId") Integer hotelId) {
         service.deleteFromFavorites(userId, hotelId);
     }

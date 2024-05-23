@@ -13,4 +13,11 @@ public interface HotelReservationRepository extends JpaRepository<HotelReservati
     List<HotelReservation> findByHotelId(Integer hotelId);
 
     boolean existsByHotelIdAndCheckInDateBetweenOrHotelIdAndCheckOutDateBetween(Integer hotelId, LocalDate checkInDate, LocalDate checkOutDate, Integer hotelId1, LocalDate checkInDate1, LocalDate checkOutDate1);
+
+    boolean existsByHotelIdAndCheckInDateLessThanEqualAndCheckOutDateGreaterThanEqual(
+            Integer hotelId, LocalDate checkOutDate, LocalDate checkInDate);
+
+    List<HotelReservation> findByHotelIdAndCheckInDateLessThanEqualAndCheckOutDateGreaterThanEqual(
+            Integer hotelId, LocalDate checkOutDate, LocalDate checkInDate);
+
 }

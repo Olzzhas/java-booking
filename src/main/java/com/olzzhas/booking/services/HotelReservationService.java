@@ -1,13 +1,16 @@
 package com.olzzhas.booking.services;
 
+import com.olzzhas.booking.exception.ApiRequestException;
 import com.olzzhas.booking.hotel.HotelReservation;
 import com.olzzhas.booking.repository.HotelReservationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional // Important for ensuring data consistency
@@ -20,13 +23,17 @@ public class HotelReservationService {
     }
 
     public HotelReservation createReservation(HotelReservation reservation) {
-        // Basic validation (more comprehensive validation would be needed in a real app)
         if (reservation.getCheckInDate().isAfter(reservation.getCheckOutDate())) {
-            throw new IllegalArgumentException("Check-out date must be after check-in date.");
+            throw new ApiRequestException("This email is already in use");
         }
 
-        // You might want to check availability here before confirming the reservation
-        // ...
+        if (repository.existsByHotelIdAndCheckInDateLessThanEqualAndCheckOutDateGreaterThanEqual(
+                reservation.getHotelId(),
+                reservation.getCheckOutDate(),
+                reservation.getCheckInDate())) {
+
+            throw new ApiRequestException("Overlapping reservation exists for this hotel and dates.");
+        }
 
         return repository.save(reservation);
     }
@@ -82,4 +89,26 @@ public class HotelReservationService {
     public void deleteReservation(Integer id) {
         repository.deleteById(id);
     }
+
+    public List<LocalDate> getAvailableDates(Integer hotelId, LocalDate startDate, LocalDate endDate) {
+        if (startDate.isAfter(endDate)) {
+            throw new ApiRequestException("Start date cannot be after end date.");
+        }
+
+        List<HotelReservation> existingReservations = repository.findByHotelIdAndCheckInDateLessThanEqualAndCheckOutDateGreaterThanEqual(
+                hotelId, endDate, startDate);
+
+        List<LocalDate> allDates = startDate.datesUntil(endDate.plusDays(1)).collect(Collectors.toList());
+
+        for (HotelReservation reservation : existingReservations) {
+            LocalDate date = reservation.getCheckInDate();
+            while (!date.isAfter(reservation.getCheckOutDate())) {
+                allDates.remove(date);
+                date = date.plusDays(1);
+            }
+        }
+
+        return allDates;
+    }
+
 }
